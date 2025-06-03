@@ -47,3 +47,13 @@
     <a asp-page="./Edit" asp-route-id="@Model.Movie.Id">Edit</a> |
     <a asp-page="./Index">Back to List</a>
 </div>
+<div class="mt-4">
+    <h4>Cast</h4>
+    <hr />
+    @foreach (var member in Model.CastMembers)
+    {
+        <div>
+            <p><b>@member.FirstName @member.LastName ---- @member.ScreenName</b></p>
+        </div>
+    }
+</div>

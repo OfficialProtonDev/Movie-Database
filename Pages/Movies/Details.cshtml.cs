@@ -20,6 +20,7 @@ namespace Movie_Database.Pages.Movies
         }
 
         public Movie Movie { get; set; } = default!;
+        public List<Cast> CastMembers { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(Guid? id)
         {
@@ -33,6 +34,7 @@ namespace Movie_Database.Pages.Movies
             if (movie is not null)
             {
                 Movie = movie;
+                CastMembers = await _context.Casts.Where(c => c.MovieId == id).ToListAsync();
 
                 return Page();
             }
