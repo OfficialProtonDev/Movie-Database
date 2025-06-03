@@ -1,3 +1,6 @@
+using DM.MovieApi.ApiResponse;
+using DM.MovieApi.MovieDb.Movies;
+using DM.MovieApi;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -12,9 +15,21 @@ namespace Movie_Database.Pages
             _logger = logger;
         }
 
-        public void OnGet()
-        {
+        public IReadOnlyList<MovieInfo> TopRatedMovies { get; set; } = new List<MovieInfo>();
 
+        public async Task<IActionResult> OnGetAsync()
+        {
+            var movieApi = MovieDbFactory.Create<IApiMovieRequest>().Value;
+            ApiSearchResponse<MovieInfo> response = await movieApi.GetTopRatedAsync();
+
+            if (response is not null)
+            {
+                TopRatedMovies = response.Results;
+
+                return Page();
+            }
+
+            return NotFound();
         }
     }
 }

@@ -9,3 +9,20 @@
     <p>To enter a movie click <a href="/movies">here</a>.</p>
     <p>To enter a cast member click <a href="/casts">here</a>.</p>
 </div>
+<div class="row g-4">
+    @foreach (var movie in Model.TopRatedMovies)
+    {
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="card h-100">
+                <img src="@($"https://image.tmdb.org/t/p/w200{movie.PosterPath}")" class="card-img-top" alt="@movie.Title Poster">
+                <div class="card-body">
+                    <h5 class="card-title">@movie.Title</h5>
+                    <p class="card-text">@movie.Overview</p>
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted"><b>Release Date:</b> @movie.ReleaseDate.ToString("MMMM d, yyyy")</small>
+                </div>
+            </div>
+        </div>
+    }
+</div>
