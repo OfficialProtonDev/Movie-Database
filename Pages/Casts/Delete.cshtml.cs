@@ -29,7 +29,7 @@ namespace Movie_Database.Pages.Casts
                 return NotFound();
             }
 
-            var cast = await _context.Casts.FirstOrDefaultAsync(m => m.Id == id);
+            var cast = await _context.Casts.Include(c => c.Movie).FirstOrDefaultAsync(m => m.Id == id);
 
             if (cast is not null)
             {
