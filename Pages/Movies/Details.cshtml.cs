@@ -45,7 +45,7 @@ namespace Movie_Database.Pages.Movies
 
                 foreach (MovieInfo info in response.Results)
                 {
-                    if (info.ReleaseDate.Date == Movie.ReleaseDate)
+                    if (info.ReleaseDate.Date == Movie.ReleaseDate?.Date)
                     {
                         MovieInfo = info;
                         break;

@@ -50,12 +50,28 @@
 <div class="mt-4">
     <h4>Cast</h4>
     <hr />
-    @foreach (var member in Model.CastMembers)
+    @if (Model.CastMembers != null && Model.CastMembers.Any())
+    {
+        foreach (var member in Model.CastMembers)
+        {
+            <div>
+                <p><b>@member.FirstName @member.LastName ---- @member.ScreenName</b></p>
+            </div>
+        }
+    }
+    else
     {
         <div>
-            <p><b>@member.FirstName @member.LastName ---- @member.ScreenName</b></p>
+            <p><em>No cast members available.</em></p>
         </div>
     }
     <hr />
-    <img class="mb-3" src="@($"https://image.tmdb.org/t/p/w200{Model.MovieInfo.PosterPath}")">
+    @if (Model.MovieInfo != null && !string.IsNullOrEmpty(Model.MovieInfo.PosterPath))
+    {
+        <img class="mb-3" src="@($"https://image.tmdb.org/t/p/w200{Model.MovieInfo.PosterPath}")">
+    }
+    else
+    {
+        <p><em>No poster available.</em></p>
+    }
 </div>
